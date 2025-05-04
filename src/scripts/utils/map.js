@@ -83,6 +83,14 @@ export default class Map {
         this.#map.setView(latLng(coordinate), zoomLevel);
     }
 
+    getCenter() {
+        const { lat, lng } = this.#map.getCenter();
+        return {
+            latitude: lat,
+            longitude: lng,
+        };
+    }
+
     createIcon(options = {}) {
         return icon({
             ...Icon.Default.prototype.options,
@@ -112,5 +120,9 @@ export default class Map {
         }
         newMarker.addTo(this.#map);
         return newMarker;
+    }
+
+    addMapEventListener(eventName, callback) {
+        this.#map.addEventListener(eventName, callback);
     }
 }
